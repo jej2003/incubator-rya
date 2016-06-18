@@ -23,8 +23,9 @@ import java.util.List;
 
 import mvm.rya.accumulo.AccumuloRdfConfiguration;
 import mvm.rya.api.RdfCloudTripleStoreConfiguration;
-import mvm.rya.indexing.accumulo.ConfigUtils;
-import mvm.rya.sail.config.RyaSailFactory;
+import mvm.rya.indexing.ConfigUtils;
+import mvm.rya.indexing.entity.EntityConfig;
+import mvm.rya.indexing.sail.config.RyaSailFactory;
 
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;
@@ -242,9 +243,9 @@ public class EntityDirectExample {
         AccumuloRdfConfiguration conf = new AccumuloRdfConfiguration();
 
         conf.setBoolean(ConfigUtils.USE_MOCK_INSTANCE, USE_MOCK_INSTANCE);
-        conf.set(ConfigUtils.USE_ENTITY, "true");
+        conf.set(EntityConfig.USE_ENTITY, "true");
         conf.set(RdfCloudTripleStoreConfiguration.CONF_TBL_PREFIX, RYA_TABLE_PREFIX);
-        conf.set(ConfigUtils.ENTITY_TABLENAME, RYA_TABLE_PREFIX + "entity");
+        conf.set(EntityConfig.ENTITY_TABLENAME, RYA_TABLE_PREFIX + "entity");
         conf.set(ConfigUtils.CLOUDBASE_USER, "root");
         conf.set(ConfigUtils.CLOUDBASE_PASSWORD, "");
         conf.set(ConfigUtils.CLOUDBASE_INSTANCE, INSTANCE);

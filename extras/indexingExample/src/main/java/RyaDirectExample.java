@@ -19,6 +19,13 @@
 
 import java.util.List;
 
+import mvm.rya.indexing.ConfigUtils;
+import mvm.rya.indexing.freetext.FreeTextConfig;
+import mvm.rya.indexing.geospatial.GeoConfig;
+import mvm.rya.indexing.geospatial.GeoConstants;
+import mvm.rya.indexing.sail.config.RyaSailFactory;
+import mvm.rya.indexing.temporal.TemporalConfig;
+import mvn.rya.indexing.pcj.PCJConfig;
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;
 import org.apache.accumulo.core.client.Connector;
@@ -59,10 +66,7 @@ import com.google.common.base.Optional;
 import mvm.rya.accumulo.AccumuloRdfConfiguration;
 import mvm.rya.api.RdfCloudTripleStoreConfiguration;
 import mvm.rya.api.persist.RyaDAOException;
-import mvm.rya.indexing.accumulo.ConfigUtils;
-import mvm.rya.indexing.accumulo.geo.GeoConstants;
 import mvm.rya.rdftriplestore.inference.InferenceEngineException;
-import mvm.rya.sail.config.RyaSailFactory;
 
 public class RyaDirectExample {
 	private static final Logger log = Logger.getLogger(RyaDirectExample.class);
@@ -154,10 +158,10 @@ public class RyaDirectExample {
 		final AccumuloRdfConfiguration conf = new AccumuloRdfConfiguration();
 
 		conf.setBoolean(ConfigUtils.USE_MOCK_INSTANCE, USE_MOCK_INSTANCE);
-		conf.set(ConfigUtils.USE_PCJ, "true");
-		conf.set(ConfigUtils.USE_GEO, "true");
-		conf.set(ConfigUtils.USE_FREETEXT, "true");
-		conf.set(ConfigUtils.USE_TEMPORAL, "true");
+		conf.set(PCJConfig.USE_PCJ, "true");
+		conf.set(GeoConfig.USE_GEO, "true");
+		conf.set(FreeTextConfig.USE_FREETEXT, "true");
+		conf.set(TemporalConfig.USE_TEMPORAL, "true");
 		conf.set(RdfCloudTripleStoreConfiguration.CONF_TBL_PREFIX,
 				RYA_TABLE_PREFIX);
 		conf.set(ConfigUtils.CLOUDBASE_USER, "root");
@@ -167,7 +171,7 @@ public class RyaDirectExample {
 		conf.set(ConfigUtils.CLOUDBASE_AUTHS, AUTHS);
 
 		// only geo index statements with geo:asWKT predicates
-		conf.set(ConfigUtils.GEO_PREDICATES_LIST,
+		conf.set(GeoConfig.GEO_PREDICATES_LIST,
 				GeoConstants.GEO_AS_WKT.stringValue());
 		return conf;
 	}
@@ -802,7 +806,7 @@ public class RyaDirectExample {
 
 
 		final Configuration config = new AccumuloRdfConfiguration(conf);
-		config.set(ConfigUtils.USE_PCJ, "false");
+		config.set(PCJConfig.USE_PCJ, "false");
 		Sail extSail = null;
 		try {
 			extSail = RyaSailFactory.getInstance(config);

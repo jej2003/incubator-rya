@@ -19,6 +19,11 @@
 
 import java.util.List;
 
+import mvm.rya.indexing.ConfigUtils;
+import mvm.rya.indexing.freetext.FreeTextConfig;
+import mvm.rya.indexing.geospatial.GeoConfig;
+import mvm.rya.indexing.geospatial.GeoConstants;
+import mvm.rya.indexing.sail.config.RyaSailFactory;
 import org.apache.commons.lang.Validate;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.log4j.Logger;
@@ -44,12 +49,9 @@ import org.openrdf.repository.sail.SailRepositoryConnection;
 import org.openrdf.sail.Sail;
 
 import mvm.rya.api.RdfCloudTripleStoreConfiguration;
-import mvm.rya.indexing.accumulo.ConfigUtils;
-import mvm.rya.indexing.accumulo.geo.GeoConstants;
 import mvm.rya.mongodb.MongoDBRdfConfiguration;
 import mvm.rya.rdftriplestore.RdfCloudTripleStore;
 import mvm.rya.rdftriplestore.inference.InferenceEngineException;
-import mvm.rya.sail.config.RyaSailFactory;
 
 public class MongoRyaDirectExample {
     private static final Logger log = Logger.getLogger(MongoRyaDirectExample.class);
@@ -254,11 +256,11 @@ public class MongoRyaDirectExample {
         conf.set(MongoDBRdfConfiguration.USE_TEST_MONGO, "true");
         conf.set(MongoDBRdfConfiguration.MONGO_DB_NAME, MONGO_DB);
         conf.set(MongoDBRdfConfiguration.MONGO_COLLECTION_PREFIX, MONGO_COLL_PREFIX);
-        conf.set(ConfigUtils.GEO_PREDICATES_LIST, "http://www.opengis.net/ont/geosparql#asWKT");
-        conf.set(ConfigUtils.USE_GEO, "true");
-        conf.set(ConfigUtils.USE_FREETEXT, "true");
+        conf.set(GeoConfig.GEO_PREDICATES_LIST, "http://www.opengis.net/ont/geosparql#asWKT");
+        conf.set(GeoConfig.USE_GEO, "true");
+        conf.set(FreeTextConfig.USE_FREETEXT, "true");
         conf.set(RdfCloudTripleStoreConfiguration.CONF_TBL_PREFIX, MONGO_COLL_PREFIX);
-        conf.set(ConfigUtils.GEO_PREDICATES_LIST, GeoConstants.GEO_AS_WKT.stringValue());
+        conf.set(GeoConfig.GEO_PREDICATES_LIST, GeoConstants.GEO_AS_WKT.stringValue());
         conf.set(ConfigUtils.FREETEXT_PREDICATES_LIST, RDFS.LABEL.stringValue());
         return conf;
     }

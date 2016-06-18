@@ -14,6 +14,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	<modules>
+		<module>geospatial</module>
+		<module>indexing-core</module>
+		<module>temporal</module>
+		<module>pcj</module>
+		<module>freetext</module>
+		<module>entity</module>
+	</modules>
 	<parent>
 		<groupId>org.apache.rya</groupId>
 		<artifactId>rya.extras</artifactId>
@@ -25,77 +34,77 @@
 
 	<dependencies>
 
-		<dependency>
-		   <groupId>org.apache.accumulo</groupId>
-            <artifactId>accumulo-minicluster</artifactId>
-            <version>${accumulo.version}</version>
-            <scope>test</scope>
-		</dependency>
+		<!--<dependency>-->
+		   <!--<groupId>org.apache.accumulo</groupId>-->
+            <!--<artifactId>accumulo-minicluster</artifactId>-->
+            <!--<version>${accumulo.version}</version>-->
+            <!--<scope>test</scope>-->
+		<!--</dependency>-->
 
-		<dependency>
-			<groupId>org.apache.rya</groupId>
-			<artifactId>rya.sail</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>hsqldb</artifactId>
-					<groupId>hsqldb</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.rya</groupId>
-			<artifactId>accumulo.rya</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.rya</groupId>
-			<artifactId>mongodb.rya</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.rya</groupId>
-			<artifactId>rya.prospector</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.rya</groupId>-->
+			<!--<artifactId>rya.sail</artifactId>-->
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<artifactId>hsqldb</artifactId>-->
+					<!--<groupId>hsqldb</groupId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.rya</groupId>-->
+			<!--<artifactId>accumulo.rya</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.rya</groupId>-->
+			<!--<artifactId>mongodb.rya</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.rya</groupId>-->
+			<!--<artifactId>rya.prospector</artifactId>-->
+		<!--</dependency>-->
 
 		<!-- Free Text Indexing -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.lucene</groupId>-->
+			<!--<artifactId>lucene-core</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.lucene</groupId>-->
+			<!--<artifactId>lucene-analyzers</artifactId>-->
+		<!--</dependency>-->
 
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>commons-codec</groupId>-->
+			<!--<artifactId>commons-codec</artifactId>-->
+		<!--</dependency>-->
 
 		<!-- Geo Indexing -->
-		<dependency>
-			<groupId>org.locationtech.geomesa</groupId>
-			<artifactId>geomesa-accumulo-datastore</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.locationtech.geomesa</groupId>-->
+			<!--<artifactId>geomesa-accumulo-datastore</artifactId>-->
+		<!--</dependency>-->
 
 		<!-- PCJ Indexing -->
-		<dependency>
-			<groupId>org.apache.rya</groupId>
-			<artifactId>rya.indexing.pcj</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.rya</groupId>
-			<artifactId>rya.pcj.fluo.api</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.rya</groupId>-->
+			<!--<artifactId>rya.indexing.pcj</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.rya</groupId>-->
+			<!--<artifactId>rya.pcj.fluo.api</artifactId>-->
+		<!--</dependency>-->
 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<scope>test</scope>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>junit</groupId>-->
+			<!--<artifactId>junit</artifactId>-->
+			<!--<scope>test</scope>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.mockito</groupId>-->
+			<!--<artifactId>mockito-all</artifactId>-->
+			<!--<scope>test</scope>-->
+		<!--</dependency>-->
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -122,12 +131,12 @@
 				<executions>
 					<execution>
 						<configuration>
-							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<shadedClassifierName>map-reduce</shadedClassifierName>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-							</transformers>
+							<!--<shadedArtifactAttached>true</shadedArtifactAttached>-->
+							<!--<shadedClassifierName>map-reduce</shadedClassifierName>-->
+							<!--<transformers>-->
+								<!--<transformer-->
+									<!--implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />-->
+							<!--</transformers>-->
 						</configuration>
 					</execution>
 					<execution>
